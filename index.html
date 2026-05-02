@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* (same styles – kept unchanged) */
 :root{--red:#e63329;--red-dark:#c0241a;--black:#111;--white:#fff;--off:#f7f7f7;--border:#e8e8e8;--text:#222;--muted:#888;--disp:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;--radius:6px;--shadow:0 2px 16px rgba(0,0,0,.08);--shadow-lg:0 8px 40px rgba(0,0,0,.13);}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -16,19 +15,24 @@ a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 ul{list-style:none}
 button{font-family:var(--body);cursor:pointer;border:none;outline:none;background:none}
-.topbar{background:var(--black);color:rgba(255,255,255,.7);font-size:12px;padding:8px 0}
-.topbar-inner{max-width:1320px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.topbar-links{display:flex;gap:20px}
-.topbar-links a{color:rgba(255,255,255,.5)}
+
+/* NAV (top bar removed, search inside nav) */
 .nav-wrap{position:sticky;top:0;z-index:800;background:#fff;border-bottom:2px solid var(--black)}
-.nav-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;height:74px;padding:0 24px}
-.nav-logo{font-family:var(--disp);font-size:28px;font-weight:900;color:var(--black);cursor:pointer}
+.nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:74px;padding:0 24px;gap:20px}
+.nav-logo{font-family:var(--disp);font-size:28px;font-weight:900;color:var(--black);cursor:pointer;white-space:nowrap}
 .nav-logo span{color:var(--red)}
 .nav-logo small{font-size:10px;font-weight:600;display:block;color:var(--muted)}
-.nav-links{display:flex;gap:32px;justify-content:center}
-.nav-links a{font-family:var(--disp);font-size:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);padding:6px 0}
-.nav-links a:hover,.nav-links a.active{color:var(--red)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links .dropdown{position:relative}
+.nav-links .dropbtn{font-family:var(--disp);font-size:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);padding:6px 0;background:none;cursor:pointer}
+.nav-links .dropdown-content{display:none;position:absolute;top:100%;left:0;background:#fff;min-width:200px;box-shadow:0 8px 16px rgba(0,0,0,.1);border-radius:8px;z-index:1000;padding:8px 0}
+.nav-links .dropdown-content a{display:block;padding:10px 20px;font-family:var(--body);font-size:14px;font-weight:500;color:var(--black);text-transform:none;letter-spacing:normal}
+.nav-links .dropdown-content a:hover{background:var(--off);color:var(--red)}
+.nav-links .dropdown:hover .dropdown-content{display:block}
 .nav-actions{display:flex;align-items:center;gap:14px}
+.nav-search{display:flex;align-items:center;background:#f3f4f6;border:1px solid var(--border);border-radius:30px;padding:6px 12px}
+.nav-search input{background:transparent;border:none;padding:6px 8px;font-size:13px;width:160px;outline:none;color:var(--black)}
+.nav-search button{background:transparent;color:var(--muted);font-size:13px}
 .cart-btn{position:relative;background:var(--black);color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .cart-count{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
 .hamburger{display:none;background:var(--black);color:#fff;width:44px;height:44px;border-radius:50%;align-items:center;justify-content:center}
@@ -115,7 +119,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
 .footer-brand p{color:rgba(255,255,255,.5);max-width:400px}
 .footer-col h4{font-family:var(--disp);font-size:16px;font-weight:800;color:#fff;margin-bottom:14px}
 .footer-col a{display:block;padding:5px 0;color:rgba(255,255,255,.6)}
-.footer-bottom{max-width:1320px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1);padding-top:20px;text-align:center;color:rgba(255,255,255,.4)}
+.footer-bottom{max-width:1320px;margin:0 auto;padding-top:20px;text-align:center;color:rgba(255,255,255,.4)}
 .footer-bottom-links{display:flex;justify-content:center;gap:30px;margin-bottom:12px}
 .footer-bottom-links a{color:rgba(255,255,255,.5)}
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1100;opacity:0;pointer-events:none}
@@ -144,7 +148,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
 @media(max-width:900px){
   .nav-links{display:none}
   .hamburger{display:flex}
-  .topbar-links{display:none}
+  .nav-search{display:none}
   .brand-grid,.product-grid{grid-template-columns:repeat(2,1fr)}
   .request-grid{grid-template-columns:1fr}
   .footer-inner{grid-template-columns:1fr}
@@ -176,18 +180,35 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
   </div>
 </div>
 
-<!-- TOPBAR & NAV -->
-<div class="topbar"><div class="topbar-inner"><span><strong>FREE</strong> delivery within Juja on orders above KSh 5,000</span><div class="topbar-links"><a href="#location">Juja Town</a><a href="tel:+254700000000">Call Us</a></div></div></div>
+<!-- NAV (integrated search) -->
 <header class="nav-wrap">
   <div class="nav-inner">
     <div class="nav-logo" onclick="goHome()">WINTER<span>FELL</span><small>TECHNOLOGIES</small></div>
     <nav class="nav-links">
       <a href="#" onclick="event.preventDefault();goHome()">Home</a>
-      <a href="#collections" onclick="goHome()">Collections</a>
-      <a href="#request">Support</a>
+      <!-- Collections Dropdown -->
+      <div class="dropdown">
+        <div class="dropbtn">Collections</div>
+        <div class="dropdown-content" id="collectionsDropdown"></div>
+      </div>
+      <!-- Support Dropdown -->
+      <div class="dropdown">
+        <div class="dropbtn">Support</div>
+        <div class="dropdown-content">
+          <a href="#request"><i class="fas fa-question-circle"></i> Request a Product</a>
+          <a href="https://wa.me/254795323615" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="tel:+254700000000"><i class="fas fa-phone"></i> Call Us</a>
+          <a href="mailto:support@winterfell.co.ke"><i class="fas fa-envelope"></i> Email</a>
+          <a href="#location"><i class="fas fa-map-marker-alt"></i> Visit Store</a>
+        </div>
+      </div>
       <a href="#location">Location</a>
     </nav>
     <div class="nav-actions">
+      <div class="nav-search">
+        <input type="text" id="globalSearchInput" placeholder="Search products..." onkeypress="if(event.key==='Enter') globalSearch()">
+        <button onclick="globalSearch()"><i class="fas fa-search"></i></button>
+      </div>
       <button class="cart-btn" onclick="openCart()"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></button>
       <button class="hamburger" onclick="openMenu()"><i class="fas fa-bars"></i></button>
     </div>
@@ -200,7 +221,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
 <!-- TRUST BAR -->
 <div class="trust-bar" id="trustBar"><div class="trust-inner"><div class="ti"><i class="fas fa-shield-check ti-icon"></i><div><strong>Genuine Products</strong><span>100% tested</span></div></div><div class="ti"><i class="fas fa-money-bill ti-icon"></i><div><strong>Best Price</strong><span>Beat any quote</span></div></div><div class="ti"><i class="fas fa-truck-fast ti-icon"></i><div><strong>Free Delivery</strong><span>Juja (≥5k)</span></div></div><div class="ti"><i class="fab fa-whatsapp ti-icon"></i><div><strong>24/7 Support</strong><span>WhatsApp</span></div></div></div></div>
 
-<!-- MAIN WRAPPER (home page content will be injected here) -->
+<!-- MAIN WRAPPER (home page content injected here) -->
 <div id="homePage" style="display:block;"></div>
 
 <!-- COLLECTION PAGE (brands) -->
@@ -243,39 +264,29 @@ const WHATSAPP_NUMBER = "254795323615";
 let products = [], collections = [], heroSlides = [], cart = [];
 
 async function fetchWithCorsProxy(url) {
-  try {
-    // If running locally (file://), use a free CORS proxy
-    if (window.location.protocol === 'file:') {
-      const proxy = 'https://api.allorigins.win/raw?url=';
-      const response = await fetch(proxy + encodeURIComponent(url));
-      const text = await response.text();
-      return { ok: true, text: async () => text };
-    }
-    const response = await fetch(url);
-    return response;
-  } catch (e) {
-    console.warn('Fetch failed', e);
-    return { ok: false };
+  if (window.location.protocol === 'file:') {
+    const proxy = 'https://api.allorigins.win/raw?url=';
+    const response = await fetch(proxy + encodeURIComponent(url));
+    const text = await response.text();
+    return { ok: true, text: async () => text };
   }
+  return fetch(url);
 }
 
 async function loadAllData() {
   try {
-    // Load collections
     let res = await fetchWithCorsProxy(CSV_COLLECTIONS_URL);
     if (res && res.ok) {
       let text = await res.text();
       let rows = text.split(/\r?\n/).slice(1).filter(r=>r.trim());
       collections = rows.map(r=>{let c=r.split(',').map(v=>v.replace(/^"|"$/g,'').trim()); return {id:c[0], name:c[1], image:c[2], order:parseInt(c[3])||999};}).filter(c=>c.id).sort((a,b)=>a.order-b.order);
     }
-    // Load hero slides
     res = await fetchWithCorsProxy(CSV_HERO_URL);
     if (res && res.ok) {
       let text = await res.text();
       let rows = text.split(/\r?\n/).slice(1).filter(r=>r.trim());
       heroSlides = rows.map(r=>{let c=r.split(',').map(v=>v.replace(/^"|"$/g,'').trim()); return {image:c[0], title_html:c[1], subtitle:c[2], cta_text:c[3], cta_collection:c[4], order:parseInt(c[5])||999};}).filter(s=>s.image).sort((a,b)=>a.order-b.order);
     }
-    // Load products
     res = await fetchWithCorsProxy(CSV_PRODUCTS_URL);
     if (res && res.ok) {
       let text = await res.text();
@@ -284,11 +295,17 @@ async function loadAllData() {
     }
     console.log(`Loaded: ${collections.length} collections, ${heroSlides.length} hero slides, ${products.length} products`);
   } catch(e) { console.warn("CSV load error", e); }
-  // Render everything
   buildHeroSlider();
   renderHome();
+  updateCollectionsDropdown();
   handleRouting();
   updateCartUI();
+}
+
+function updateCollectionsDropdown() {
+  const dropdown = document.getElementById("collectionsDropdown");
+  if (!dropdown) return;
+  dropdown.innerHTML = collections.map(c => `<a href="#" onclick="event.preventDefault();openCollection('${c.id}')">${c.name}</a>`).join("");
 }
 
 function buildHeroSlider() {
@@ -421,7 +438,31 @@ function handleRouting(){
   } else goHome();
 }
 
-// CART (same as before)
+function globalSearch(){
+  let q = document.getElementById("globalSearchInput").value.trim().toLowerCase();
+  if(!q) return;
+  let results = products.filter(p=>p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
+  if(results.length){
+    let gridHtml = results.map(p=>`
+      <div class="product-card">
+        <div class="product-img"><img src="${p.image||'https://placehold.co/200x200?text=No+Image'}" alt="${p.name}"></div>
+        <div class="product-body">
+          <div class="product-name">${p.name}</div>
+          <div class="product-meta">${p.description}</div>
+          <div class="product-price">KSh ${p.price.toLocaleString()}</div>
+          <button class="product-add" onclick='addToCart(${JSON.stringify({n:p.name,p:p.price,b:p.brand,m:p.description||""})})'><i class="fas fa-cart-plus"></i> Add to Cart</button>
+        </div>
+      </div>
+    `).join("");
+    showOnly("brandPage");
+    document.getElementById("brandTitle").innerHTML = `<span>Search Results</span> for “${q}”`;
+    document.getElementById("productGrid").innerHTML = gridHtml;
+    document.getElementById("heroSlider").style.display="none";
+    document.getElementById("trustBar").style.display="none";
+  } else toast("No products found");
+}
+
+// CART (unchanged)
 function addToCart(item){
   let key = item.n+"|"+(item.m||"");
   let ex = cart.find(x=>x.key===key);
