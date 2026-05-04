@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--red:#e63329;--red-dark:#c0241a;--black:#111;--white:#fff;--off:#f7f7f7;--border:#e8e8e8;--text:#222;--muted:#888;--disp:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;--radius:6px;--shadow:0 2px 16px rgba(0,0,0,.08);--shadow-lg:0 8px 40px rgba(0,0,0,.13);}
+:root{--red:#e63329;--red-dark:#c0241a;--black:#111;--white:#fff;--off:#f7f7f7;--border:#e8e8e8;--text:#222;--muted:#888;--disp:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;--radius:8px;--shadow:0 2px 16px rgba(0,0,0,.08);--shadow-lg:0 8px 40px rgba(0,0,0,.13);}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--body);background:#fff;color:var(--text);overflow-x:hidden}
@@ -69,12 +69,16 @@ button{font-family:var(--body);cursor:pointer;border:none;outline:none;backgroun
 .section-head h2{font-family:var(--disp);font-size:clamp(30px,4vw,44px);font-weight:900;text-transform:uppercase;color:var(--black)}
 .section-head h2 span{color:var(--red)}
 .section-head p{color:var(--muted);max-width:560px;margin:0 auto}
-.collections-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:28px;margin-top:20px}
-.collection-card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;border:1px solid #eee;transition:transform .25s,box-shadow .25s}
+/* COLLECTIONS GRID – HAVIT style: narrower cards, more columns */
+.collections-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(180px, 200px));gap:24px;justify-content:center;margin-top:20px}
+@media (min-width: 1200px){
+  .collections-grid{grid-template-columns:repeat(5,minmax(180px,200px));justify-content:center}
+}
+.collection-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;border:1px solid #eee;transition:transform .25s,box-shadow .25s;max-width:200px;margin:0 auto;width:100%}
 .collection-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .collection-img{height:220px;width:100%}
 .collection-img img{width:100%;height:100%;object-fit:cover}
-.collection-name{padding:20px 12px 24px;font-family:var(--disp);font-size:22px;font-weight:800;text-align:center;text-transform:uppercase;background:#fff}
+.collection-name{padding:14px 10px 18px;font-family:var(--disp);font-size:17px;font-weight:800;text-align:center;text-transform:uppercase;background:#fff;word-break:break-word}
 .moving-strip{background:#f59e0b;color:#1f2937;padding:14px 0;overflow:hidden}
 .strip-track{display:flex;gap:40px;animation:scrollStrip 25s linear infinite;width:max-content}
 .strip-item{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;text-transform:uppercase}
@@ -123,6 +127,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
 .footer-bottom{max-width:1320px;margin:0 auto;padding-top:20px;text-align:center;color:rgba(255,255,255,.4)}
 .footer-bottom-links{display:flex;justify-content:center;gap:30px;margin-bottom:12px}
 .footer-bottom-links a{color:rgba(255,255,255,.5)}
+.footer-credit{margin-top:16px;font-size:12px;color:rgba(255,255,255,.4)}
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1100;opacity:0;pointer-events:none}
 .cart-overlay.open{opacity:1;pointer-events:auto}
 .cart-drawer{position:fixed;top:0;right:0;bottom:0;width:420px;background:#fff;z-index:1101;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s}
@@ -159,7 +164,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
   .brand-grid,.product-grid{grid-template-columns:repeat(2,1fr)}
   .request-grid{grid-template-columns:1fr}
   .footer-inner{grid-template-columns:1fr}
-  .collections-grid{grid-template-columns:repeat(auto-fill, minmax(240px, 1fr))}
+  .collections-grid{grid-template-columns:repeat(auto-fill, minmax(160px, 1fr))}
   .lightbox-thumb{width:40px;height:40px}
 }
 </style>
@@ -174,7 +179,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
   <div class="cart-foot"><div class="cart-total"><span>Total</span><span id="cartTotal">KSh 0</span></div><button class="cart-checkout" id="checkoutBtn" onclick="checkoutWhatsApp()"><i class="fab fa-whatsapp"></i> Checkout via WhatsApp</button></div>
 </aside>
 
-<!-- LIGHTBOX (multiple images support) -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
   <img class="lightbox-img" id="lightboxImg" src="">
@@ -210,8 +215,8 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
         <div class="dropbtn">Support</div>
         <div class="dropdown-content">
           <a href="#request"><i class="fas fa-question-circle"></i> Request a Product</a>
-          <a href="https://wa.me/254795323615" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          <a href="tel:+254700000000"><i class="fas fa-phone"></i> Call Us</a>
+          <a href="https://wa.me/254795323615"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="tel:+254795323615"><i class="fas fa-phone"></i> Call Us</a>
           <a href="mailto:support@winterfell.co.ke"><i class="fas fa-envelope"></i> Email</a>
           <a href="#location"><i class="fas fa-map-marker-alt"></i> Visit Store</a>
         </div>
@@ -253,7 +258,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
 </section>
 
 <!-- REQUEST & LOCATION -->
-<section class="request" id="request"><div class="section-inner"><div class="request-grid"><div class="request-card"><h3>Didn't see what <span>you wanted?</span></h3><p>Tell us the exact product – we'll source it for you.</p><form onsubmit="submitRequest(event)"><div class="form-row"><label>Your Name</label><input type="text" id="reqName" required></div><div class="form-row"><label>Phone</label><input type="tel" id="reqPhone" required></div><div class="form-row"><label>Product details</label><textarea id="reqDesc" rows="3" required></textarea></div><button type="submit" class="form-submit"><i class="fab fa-whatsapp"></i> Send Request</button></form></div><div class="location-card" id="location"><h3>Visit our <span>Store</span></h3><p>Come see us — we'd love to help you in person.</p><div class="location-info"><div><i class="fas fa-map-marker-alt"></i><div><strong>Address</strong><p>Friends Corner Building<br/>Juja Town, near Juja Posta<br/>Thika Superhighway</p></div></div><div><i class="fas fa-clock"></i><div><strong>Open Hours</strong><p>Mon – Sat: 8:30 AM – 7:00 PM<br/>Sunday: 10:00 AM – 4:00 PM</p></div></div><div><i class="fas fa-phone"></i><div><strong>Call / WhatsApp</strong><p><a href="tel:+254700000000" style="color:var(--red)">+254 700 000 000</a></p></div></div></div><a href="https://www.google.com/maps/dir/?api=1&destination=Friends+Corner+Juja+Town+Juja+Posta+Thika+Superhighway" target="_blank" class="directions-btn"><i class="fas fa-directions"></i> Get Directions</a></div></div></div></section>
+<section class="request" id="request"><div class="section-inner"><div class="request-grid"><div class="request-card"><h3>Didn't see what <span>you wanted?</span></h3><p>Tell us the exact product – we'll source it for you.</p><form onsubmit="submitRequest(event)"><div class="form-row"><label>Your Name</label><input type="text" id="reqName" required></div><div class="form-row"><label>Phone</label><input type="tel" id="reqPhone" required></div><div class="form-row"><label>Product details</label><textarea id="reqDesc" rows="3" required></textarea></div><button type="submit" class="form-submit"><i class="fab fa-whatsapp"></i> Send Request</button></form></div><div class="location-card" id="location"><h3>Visit our <span>Store</span></h3><p>Come see us — we'd love to help you in person.</p><div class="location-info"><div><i class="fas fa-map-marker-alt"></i><div><strong>Address</strong><p>Friends Corner Building<br/>Juja Town, near Juja Posta<br/>Thika Superhighway</p></div></div><div><i class="fas fa-clock"></i><div><strong>Open Hours</strong><p>Mon – Sat: 8:30 AM – 7:00 PM<br/>Sunday: 10:00 AM – 4:00 PM</p></div></div><div><i class="fas fa-phone"></i><div><strong>Call / WhatsApp</strong><p><a href="tel:+254795323615">+254 795 323 615</a></p></div></div></div><a href="https://www.google.com/maps/dir/?api=1&destination=Friends+Corner+Juja+Town+Juja+Posta+Thika+Superhighway" target="_blank" class="directions-btn"><i class="fas fa-directions"></i> Get Directions</a></div></div></div></section>
 
 <footer>
   <div class="footer-inner">
@@ -261,7 +266,11 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
     <div class="footer-col"><h4>Shop</h4><a href="#collections" onclick="goHome()">Collections</a><a href="#request">Request a Product</a><a href="#location">Visit Store</a></div>
     <div class="footer-col"><h4>Contact</h4><a href="tel:+254795323615">Call Us</a><a href="https://wa.me/254795323615" target="_blank">WhatsApp</a><a href="#location">Friends Corner, Juja Town</a></div>
   </div>
-  <div class="footer-bottom"><div class="footer-bottom-links"><a href="#" onclick="event.preventDefault();goHome()">Home</a><a href="#collections" onclick="goHome()">Collections</a><a href="#request">Support</a><a href="#location">Location</a></div><p>© <span id="year"></span> Winterfell Technologies. All rights reserved.</p></div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-links"><a href="#" onclick="event.preventDefault();goHome()">Home</a><a href="#collections" onclick="goHome()">Collections</a><a href="#request">Support</a><a href="#location">Location</a></div>
+    <p>© <span id="year"></span> Winterfell Technologies. All rights reserved.</p>
+    <div class="footer-credit">Website designed & branded by Kelvin – +254 106 624 924</div>
+  </div>
 </footer>
 
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
@@ -276,7 +285,6 @@ const CSV_HERO_URL       = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSJB
 const WHATSAPP_NUMBER = "254795323615";
 let products = [], collections = [], heroSlides = [], cart = [];
 
-// Helper to parse comma-separated image URLs
 function parseImages(imgField) {
   if (!imgField) return [];
   return imgField.split(',').map(u => u.trim()).filter(u => u);
@@ -320,8 +328,8 @@ async function loadAllData() {
           brand: c[2],
           collection: c[3],
           description: c[4],
-          images: images,               // array of image URLs
-          image: images[0] || ''       // first image for card
+          images: images,
+          image: images[0] || ''
         };
       }).filter(p=>p.name && p.collection);
     }
@@ -472,9 +480,7 @@ function handleRouting(){
   } else goHome();
 }
 
-// Lightbox with multiple images
-let currentImages = [];
-let currentIndex = 0;
+let currentImages = [], currentIndex = 0;
 function openLightbox(imgListStr, idx) {
   if (!imgListStr) return;
   currentImages = imgListStr.split(',');
@@ -531,7 +537,6 @@ function globalSearch(){
   } else toast("No products found");
 }
 
-// CART (unchanged)
 function addToCart(item){
   let key = item.n+"|"+(item.m||"");
   let ex = cart.find(x=>x.key===key);
