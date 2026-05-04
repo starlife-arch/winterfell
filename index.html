@@ -15,15 +15,13 @@ a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 ul{list-style:none}
 button{font-family:var(--body);cursor:pointer;border:none;outline:none;background:none}
-
-/* NAV WRAP (black background) */
 .nav-wrap{position:sticky;top:0;z-index:800;background:var(--black);border-bottom:1px solid rgba(255,255,255,.1)}
 .nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:74px;padding:0 24px;gap:20px}
 .nav-logo{font-family:var(--disp);font-size:28px;font-weight:900;color:#fff;cursor:pointer;white-space:nowrap}
 .nav-logo span{color:var(--red)}
 .nav-logo small{font-size:10px;font-weight:600;display:block;color:rgba(255,255,255,.6)}
 .nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{font-family:var(--disp);font-size:1.2rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;padding:6px 0;transition:opacity .2s}
+.nav-links a{font-family:var(--disp);font-size:1.2rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;padding:6px 0}
 .nav-links a:hover{opacity:.8}
 .nav-links .dropdown{position:relative}
 .nav-links .dropbtn{font-family:var(--disp);font-size:1.2rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;padding:6px 0;background:none;cursor:pointer}
@@ -40,7 +38,6 @@ button{font-family:var(--body);cursor:pointer;border:none;outline:none;backgroun
 .cart-btn:hover{background:var(--red)}
 .cart-count{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
 .hamburger{display:none;background:rgba(255,255,255,.15);color:#fff;width:44px;height:44px;border-radius:50%;align-items:center;justify-content:center}
-.hamburger span{display:none}
 .mobile-menu{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;opacity:0;pointer-events:none;transition:opacity .25s}
 .mobile-menu.open{opacity:1;pointer-events:auto}
 .mobile-menu-inner{position:absolute;right:0;top:0;bottom:0;width:300px;background:#fff;padding:28px 24px;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;gap:8px}
@@ -72,7 +69,6 @@ button{font-family:var(--body);cursor:pointer;border:none;outline:none;backgroun
 .section-head h2{font-family:var(--disp);font-size:clamp(30px,4vw,44px);font-weight:900;text-transform:uppercase;color:var(--black)}
 .section-head h2 span{color:var(--red)}
 .section-head p{color:var(--muted);max-width:560px;margin:0 auto}
-/* COLLECTIONS GRID (no scroll, responsive, larger cards) */
 .collections-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:28px;margin-top:20px}
 .collection-card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;border:1px solid #eee;transition:transform .25s,box-shadow .25s}
 .collection-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
@@ -96,8 +92,9 @@ button{font-family:var(--body);cursor:pointer;border:none;outline:none;backgroun
 .brand-card .brand-sub{font-size:13px;color:var(--muted)}
 .product-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
 .product-card:hover{box-shadow:var(--shadow)}
-.product-img{height:200px;display:flex;align-items:center;justify-content:center;background:#fafafa}
-.product-img img{max-height:180px;object-fit:contain}
+.product-img{height:200px;display:flex;align-items:center;justify-content:center;background:#fafafa;cursor:pointer;position:relative}
+.product-img img{max-height:180px;object-fit:contain;transition:transform .2s}
+.product-img:hover img{transform:scale(1.05)}
 .product-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
 .product-name{font-weight:700;font-size:15px}
 .product-meta{font-size:12px;color:var(--muted);text-transform:uppercase}
@@ -144,9 +141,16 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
 .cart-foot{padding:20px 24px;border-top:1px solid var(--border);background:var(--off)}
 .cart-total{display:flex;justify-content:space-between;margin-bottom:16px}
 .cart-checkout{width:100%;background:#25D366;color:#fff;padding:14px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;gap:10px}
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;display:none;align-items:center;justify-content:center}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:2000;display:none;align-items:center;justify-content:center;flex-direction:column}
 .lightbox.show{display:flex}
-.lightbox img{max-width:92%;max-height:92vh}
+.lightbox-img{max-width:80%;max-height:80vh;object-fit:contain;border-radius:var(--radius)}
+.lightbox-nav{position:absolute;bottom:20px;left:0;right:0;display:flex;justify-content:center;gap:16px;padding:12px}
+.lightbox-nav button{background:rgba(255,255,255,.2);color:#fff;border:none;font-size:24px;width:48px;height:48px;border-radius:50%;cursor:pointer;transition:background .2s}
+.lightbox-nav button:hover{background:rgba(255,255,255,.4)}
+.lightbox-close{position:absolute;top:20px;right:30px;font-size:30px;color:#fff;cursor:pointer;background:none;border:none}
+.lightbox-thumbs{position:absolute;bottom:80px;left:0;right:0;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:10px}
+.lightbox-thumb{width:60px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;opacity:.6;transition:all .2s}
+.lightbox-thumb.active{border-color:#fff;opacity:1}
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--black);color:#fff;padding:14px 24px;border-radius:var(--radius);opacity:0;transition:all .3s}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:900px){
@@ -156,6 +160,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
   .request-grid{grid-template-columns:1fr}
   .footer-inner{grid-template-columns:1fr}
   .collections-grid{grid-template-columns:repeat(auto-fill, minmax(240px, 1fr))}
+  .lightbox-thumb{width:40px;height:40px}
 }
 </style>
 </head>
@@ -169,8 +174,16 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
   <div class="cart-foot"><div class="cart-total"><span>Total</span><span id="cartTotal">KSh 0</span></div><button class="cart-checkout" id="checkoutBtn" onclick="checkoutWhatsApp()"><i class="fab fa-whatsapp"></i> Checkout via WhatsApp</button></div>
 </aside>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lbImg" src=""></div>
+<!-- LIGHTBOX (multiple images support) -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img class="lightbox-img" id="lightboxImg" src="">
+  <div class="lightbox-nav">
+    <button id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+    <button id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  <div class="lightbox-thumbs" id="lightboxThumbs"></div>
+</div>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
@@ -183,7 +196,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
   </div>
 </div>
 
-<!-- NAV (black background, enlarged links) -->
+<!-- NAV -->
 <header class="nav-wrap">
   <div class="nav-inner">
     <div class="nav-logo" onclick="goHome()">WINTER<span>FELL</span><small>TECHNOLOGIES</small></div>
@@ -198,7 +211,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
         <div class="dropdown-content">
           <a href="#request"><i class="fas fa-question-circle"></i> Request a Product</a>
           <a href="https://wa.me/254795323615" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          <a href="tel:+254795323615"><i class="fas fa-phone"></i> Call Us</a>
+          <a href="tel:+254700000000"><i class="fas fa-phone"></i> Call Us</a>
           <a href="mailto:support@winterfell.co.ke"><i class="fas fa-envelope"></i> Email</a>
           <a href="#location"><i class="fas fa-map-marker-alt"></i> Visit Store</a>
         </div>
@@ -222,7 +235,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
 <!-- TRUST BAR -->
 <div class="trust-bar" id="trustBar"><div class="trust-inner"><div class="ti"><i class="fas fa-shield-check ti-icon"></i><div><strong>Genuine Products</strong><span>100% tested</span></div></div><div class="ti"><i class="fas fa-money-bill ti-icon"></i><div><strong>Best Price</strong><span>Beat any quote</span></div></div><div class="ti"><i class="fas fa-truck-fast ti-icon"></i><div><strong>Free Delivery</strong><span>Juja (≥5k)</span></div></div><div class="ti"><i class="fab fa-whatsapp ti-icon"></i><div><strong>24/7 Support</strong><span>WhatsApp</span></div></div></div></div>
 
-<!-- MAIN WRAPPER (home page content injected here) -->
+<!-- HOME PAGE (dynamic) -->
 <div id="homePage" style="display:block;"></div>
 
 <!-- COLLECTION PAGE (brands) -->
@@ -239,7 +252,7 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
   <div class="product-grid" id="productGrid"></div>
 </section>
 
-<!-- REQUEST & LOCATION (static) -->
+<!-- REQUEST & LOCATION -->
 <section class="request" id="request"><div class="section-inner"><div class="request-grid"><div class="request-card"><h3>Didn't see what <span>you wanted?</span></h3><p>Tell us the exact product – we'll source it for you.</p><form onsubmit="submitRequest(event)"><div class="form-row"><label>Your Name</label><input type="text" id="reqName" required></div><div class="form-row"><label>Phone</label><input type="tel" id="reqPhone" required></div><div class="form-row"><label>Product details</label><textarea id="reqDesc" rows="3" required></textarea></div><button type="submit" class="form-submit"><i class="fab fa-whatsapp"></i> Send Request</button></form></div><div class="location-card" id="location"><h3>Visit our <span>Store</span></h3><p>Come see us — we'd love to help you in person.</p><div class="location-info"><div><i class="fas fa-map-marker-alt"></i><div><strong>Address</strong><p>Friends Corner Building<br/>Juja Town, near Juja Posta<br/>Thika Superhighway</p></div></div><div><i class="fas fa-clock"></i><div><strong>Open Hours</strong><p>Mon – Sat: 8:30 AM – 7:00 PM<br/>Sunday: 10:00 AM – 4:00 PM</p></div></div><div><i class="fas fa-phone"></i><div><strong>Call / WhatsApp</strong><p><a href="tel:+254700000000" style="color:var(--red)">+254 700 000 000</a></p></div></div></div><a href="https://www.google.com/maps/dir/?api=1&destination=Friends+Corner+Juja+Town+Juja+Posta+Thika+Superhighway" target="_blank" class="directions-btn"><i class="fas fa-directions"></i> Get Directions</a></div></div></div></section>
 
 <footer>
@@ -254,15 +267,20 @@ footer{background:var(--black);color:rgba(255,255,255,.7);padding:50px 24px 24px
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
 
 <script>
-// ==================== 👇 PASTE YOUR THREE CSV LINKS HERE 👇 ====================
+// ==================== CSV LINKS (replace with your published CSV URLs) ====================
 const CSV_PRODUCTS_URL   = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_X1LG9sNen6sMQlU8PBCXvw6weg6sG141fFQW6gqhMJ4HulO2Snp3ZIWIUiH0JmRqAKwz5aHZnets/pub?output=csv";
 const CSV_COLLECTIONS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMH-48R7qjkZrr-e-ThcrD8th-8P96JuImnyvmCqmtFUZsKSl-g7MD8xiawBOmL51MstZA4Elnc5je/pub?output=csv";
 const CSV_HERO_URL       = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSJBAtJMXF7Dek3knBFgE0NF-ul5JHt-l-6q5t9_Efs8CiDnq3KlNNpUy6ZwvayhDdB3eEtUxJIB01T/pub?output=csv";
 // =============================================================================
 
 const WHATSAPP_NUMBER = "254795323615";
-
 let products = [], collections = [], heroSlides = [], cart = [];
+
+// Helper to parse comma-separated image URLs
+function parseImages(imgField) {
+  if (!imgField) return [];
+  return imgField.split(',').map(u => u.trim()).filter(u => u);
+}
 
 async function fetchWithCorsProxy(url) {
   if (window.location.protocol === 'file:') {
@@ -292,7 +310,20 @@ async function loadAllData() {
     if (res && res.ok) {
       let text = await res.text();
       let rows = text.split(/\r?\n/).slice(1).filter(r=>r.trim());
-      products = rows.map(r=>{let c=r.split(',').map(v=>v.replace(/^"|"$/g,'').trim()); return {name:c[0], price:parseInt(c[1])||0, brand:c[2], collection:c[3], description:c[4], image:c[5]};}).filter(p=>p.name && p.collection);
+      products = rows.map(r=>{
+        let c=r.split(',').map(v=>v.replace(/^"|"$/g,'').trim());
+        let imgField = c[5] || '';
+        let images = parseImages(imgField);
+        return {
+          name: c[0],
+          price: parseInt(c[1]) || 0,
+          brand: c[2],
+          collection: c[3],
+          description: c[4],
+          images: images,               // array of image URLs
+          image: images[0] || ''       // first image for card
+        };
+      }).filter(p=>p.name && p.collection);
     }
     console.log(`Loaded: ${collections.length} collections, ${heroSlides.length} hero slides, ${products.length} products`);
   } catch(e) { console.warn("CSV load error", e); }
@@ -417,7 +448,9 @@ function openBrand(collectionId, brand){
   if(brandProducts.length===0) grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">No products yet. <a href="#request" onclick="goHome()">Request a Product</a></div>`;
   else grid.innerHTML = brandProducts.map(p=>`
     <div class="product-card">
-      <div class="product-img"><img src="${p.image||'https://placehold.co/200x200?text=No+Image'}" alt="${p.name}"></div>
+      <div class="product-img" onclick="openLightbox('${p.images.join(',')}', 0)">
+        <img src="${p.image||'https://placehold.co/200x200?text=No+Image'}" alt="${p.name}" loading="lazy">
+      </div>
       <div class="product-body">
         <div class="product-name">${p.name}</div>
         <div class="product-meta">${p.description}</div>
@@ -439,6 +472,39 @@ function handleRouting(){
   } else goHome();
 }
 
+// Lightbox with multiple images
+let currentImages = [];
+let currentIndex = 0;
+function openLightbox(imgListStr, idx) {
+  if (!imgListStr) return;
+  currentImages = imgListStr.split(',');
+  currentIndex = idx;
+  showLightboxImage();
+  document.getElementById("lightbox").classList.add("show");
+  renderThumbnails();
+}
+function showLightboxImage() {
+  document.getElementById("lightboxImg").src = currentImages[currentIndex];
+}
+function renderThumbnails() {
+  const thumbsContainer = document.getElementById("lightboxThumbs");
+  thumbsContainer.innerHTML = currentImages.map((img, i) => 
+    `<img class="lightbox-thumb ${i===currentIndex ? 'active' : ''}" src="${img}" onclick="lightboxGoTo(${i})">`
+  ).join('');
+}
+function lightboxGoTo(idx) {
+  if (idx < 0) idx = 0;
+  if (idx >= currentImages.length) idx = currentImages.length - 1;
+  currentIndex = idx;
+  showLightboxImage();
+  renderThumbnails();
+}
+function lightboxPrev() { lightboxGoTo(currentIndex-1); }
+function lightboxNext() { lightboxGoTo(currentIndex+1); }
+function closeLightbox() { document.getElementById("lightbox").classList.remove("show"); }
+document.getElementById("lightboxPrev")?.addEventListener("click", lightboxPrev);
+document.getElementById("lightboxNext")?.addEventListener("click", lightboxNext);
+
 function globalSearch(){
   let q = document.getElementById("globalSearchInput").value.trim().toLowerCase();
   if(!q) return;
@@ -446,7 +512,9 @@ function globalSearch(){
   if(results.length){
     let gridHtml = results.map(p=>`
       <div class="product-card">
-        <div class="product-img"><img src="${p.image||'https://placehold.co/200x200?text=No+Image'}" alt="${p.name}"></div>
+        <div class="product-img" onclick="openLightbox('${p.images.join(',')}', 0)">
+          <img src="${p.image||'https://placehold.co/200x200?text=No+Image'}" alt="${p.name}">
+        </div>
         <div class="product-body">
           <div class="product-name">${p.name}</div>
           <div class="product-meta">${p.description}</div>
@@ -463,7 +531,7 @@ function globalSearch(){
   } else toast("No products found");
 }
 
-// CART
+// CART (unchanged)
 function addToCart(item){
   let key = item.n+"|"+(item.m||"");
   let ex = cart.find(x=>x.key===key);
@@ -522,8 +590,6 @@ function submitRequest(e){
 function toast(msg){ let t=document.getElementById("toast"); document.getElementById("toastMsg").innerText=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2500); }
 function openMenu(){ document.getElementById("mobileMenu").classList.add("open"); }
 function closeMenu(){ document.getElementById("mobileMenu").classList.remove("open"); }
-function closeLightbox(){ document.getElementById("lightbox").classList.remove("show"); }
-function openLightbox(url){ document.getElementById("lbImg").src=url; document.getElementById("lightbox").classList.add("show"); }
 
 window.addEventListener("hashchange",handleRouting);
 window.addEventListener("DOMContentLoaded",async()=>{
